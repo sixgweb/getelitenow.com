@@ -1,0 +1,223 @@
+url = "/"
+layout = "default"
+title = "Home"
+meta_title = "Elite Physique Gym | Rio Rancho, NM — Challenge the Athlete in You"
+meta_description = "Elite Physique Gym in Rio Rancho, NM. Premium fitness facility offering personal training, group classes, and state-of-the-art equipment. Challenge the athlete in you."
+
+[staffList]
+types[] = "type-26273"
+types[] = "type-24438"
+types[] = "type-7677"
+types[] = "type-171"
+types[] = "type-98"
+
+[packageList packageListHome]
+
+[placesReviews]
+reviews_link = "https://www.google.com/search?q=elite+physique+gym+rio+rancho+nm+reviews"
+rating = 5
+limit = 9
+
+[instagramMediaList]
+limit = 12
+mediaType = "all"
+sortOrder = "timestamp desc"
+displayType = "grid"
+
+[section bannerSection]
+handle = "Content\Banner"
+identifier = "slug"
+value = "home-page-banner"
+==
+{# ── HERO BANNER ────────────────────────────────────── #}
+<div class="hero-section position-relative min-vh-100 d-flex align-items-center overflow-hidden">
+    {% partial 'sections/body/banner' entry=bannerSection.first() slideshowId='heroCarousel' slideshowClass='carousel-fade position-absolute top-0 start-0 w-100 h-100' %}
+    {#<div id="heroCarousel" class="carousel slide carousel-fade position-absolute top-0 start-0 w-100 h-100" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-inner h-100">
+            <div class="carousel-item active h-100" style="background-image: url('{{ 'gallery/22-1920w.webp'|media }}'); background-size: cover; background-position: center;"></div>
+            <div class="carousel-item h-100" style="background-image: url('{{ 'banners/cycles-racks-machines.jpeg'|media }}'); background-size: cover; background-position: center;"></div>
+            <div class="carousel-item h-100" style="background-image: url('{{ 'gallery/elite-physique-gym-gallery-01-1920w.webp'|media }}'); background-size: cover; background-position: center;"></div>
+            <div class="carousel-item h-100" style="background-image: url('{{ 'gallery/elite-physique-gym-gallery-03-1920w.webp'|media }}'); background-size: cover; background-position: center;"></div>
+        </div>
+    </div>#}
+
+    {# Dark overlay #}
+    <div class="hero-overlay"></div>
+
+    {# Hero content #}
+    <div class="hero-content w-100">
+        <div class="container">
+            <div class="row align-items-center min-vh-75">
+                <div class="col-lg-8 col-xl-7 text-center text-lg-start">
+                    <div class="section-subtitle mb-3" data-animate="fadeInDown">Rio Rancho, NM</div>
+                    <h1 class="display-1 fw-bold text-uppercase text-white text-shadow mb-3 font-zebulon" data-animate="fadeInLeft">
+                        Elite<br><span class="text-yellow">Physique</span>
+                    </h1>
+                    <div class="yellow-line yellow-line-lg mb-4 mx-auto mx-lg-0" data-animate="fadeInLeft"></div>
+                    <p class="lead text-gray-200 mb-4 pe-lg-5" data-animate="fadeInUp">
+                        Challenge the athlete in you. Premium training facility with state-of-the-art equipment, certified personal trainers, and group classes for all levels.
+                    </p>
+                    <div data-animate="fadeInUp">
+                        <button class="btn btn-warning btn-lg me-2 mb-2" data-bs-target="#packagesOffcanvas" data-bs-toggle="offcanvas">
+                            <i class="bi bi-lightning-fill me-2"></i>Join Now
+                        </button>
+                        <button class="btn btn-outline-light btn-lg mb-2" data-bs-target="#tourModal" data-bs-toggle="modal">
+                            <i class="bi bi-camera-video me-2"></i>Virtual Tour
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# Scroll indicator #}
+    <div class="position-absolute bottom-0 start-50 translate-middle-x pb-4 z-3 text-center" data-animate="fadeInUp">
+        <a href="#mission" class="text-yellow text-decoration-none">
+            <div class="small text-uppercase letter-spacing-3 mb-2">Scroll</div>
+            <i class="bi bi-chevron-double-down fs-4"></i>
+        </a>
+    </div>
+</div>
+
+{# ── VALUES / MISSION ───────────────────────────────── #}
+<div id="mission" class="section-dark">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0 text-center text-lg-start">
+                <div class="section-subtitle">Our Mission</div>
+                <h2 class="display-3 text-uppercase fw-bold mb-3">Be <span class="text-yellow">Elite</span></h2>
+                <p class="lead text-gray-400">One of Rio Rancho's Premier Gyms and Fitness Centers</p>
+                <div class="yellow-line mb-4"></div>
+            </div>
+            <div class="col-lg-6">
+                <ul class="values-list">
+                    <li>
+                        <i class="bi bi-check-square-fill"></i>
+                        <div><span class="value-word">Welcome</span> <span class="text-gray-300">all levels of skill in the gym</span></div>
+                    </li>
+                    <li>
+                        <i class="bi bi-check-square-fill"></i>
+                        <div><span class="value-word">Respect</span> <span class="text-gray-300">each and every individual</span></div>
+                    </li>
+                    <li>
+                        <i class="bi bi-check-square-fill"></i>
+                        <div><span class="value-word">Encourage</span> <span class="text-gray-300">each other to be our best</span></div>
+                    </li>
+                    <li>
+                        <i class="bi bi-check-square-fill"></i>
+                        <div><span class="value-word">Enjoy</span> <span class="text-gray-300">our fitness journey</span></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{# ── STATS BAR ──────────────────────────────────────── #}
+<div class="stats-bar">
+    <div class="container">
+        <div class="row row-cols-2 row-cols-md-4">
+            <div class="col">
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Secure Check-In</div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="stat-item">
+                    <div class="stat-number">13,000+</div>
+                    <div class="stat-label">Square Feet</div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="stat-item">
+                    <div class="stat-number">FREE</div>
+                    <div class="stat-label">Classes for Members</div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="stat-item">
+                    <div class="stat-number">KIDS</div>
+                    <div class="stat-label">Club Available</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{# ── GALLERY ────────────────────────────────────────── #}
+<div id="gallery" class="section-dark py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="section-subtitle">Take a Look</div>
+            <h2 class="display-4 section-heading text-center">Gallery</h2>
+        </div>
+        {% partial 'sections/body/gallery' %}
+    </div>
+</div>
+
+{# ── CTA BANNER ─────────────────────────────────────── #}
+<div class="cta-banner py-5">
+    <div class="container position-relative z-1">
+        <div class="row align-items-center">
+            <div class="col-lg-8 mb-3 mb-lg-0">
+                <h2 class="display-5 fw-bold text-uppercase mb-1">Ready to Get Started?</h2>
+                <p class="lead mb-0">Take a virtual tour or sign up for a membership today.</p>
+            </div>
+            <div class="col-lg-4 text-lg-end">
+                <button class="btn btn-dark btn-lg me-2 mb-2" data-bs-target="#tourModal" data-bs-toggle="modal">
+                    <i class="bi bi-camera-video me-2"></i>Virtual Tour
+                </button>
+                <button class="btn btn-outline-dark btn-lg mb-2" data-bs-target="#packagesOffcanvas" data-bs-toggle="offcanvas">
+                    <i class="bi bi-lightning-fill me-2"></i>Join Now
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{# ── STAFF ──────────────────────────────────────────── #}
+<div id="staff" class="section-gray py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="section-subtitle">Meet the Team</div>
+            <h2 class="display-4 section-heading text-center">Our Staff</h2>
+        </div>
+        {% component 'staffList' %}
+    </div>
+</div>
+
+{# ── MEMBERSHIP PLANS ───────────────────────────────── #}
+<div id="packages" class="section-dark py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="section-subtitle">Get Started</div>
+            <h2 class="display-4 section-heading text-center">Membership Plans</h2>
+        </div>
+        {% component 'packageListHome' %}
+    </div>
+</div>
+
+{# ── REVIEWS ────────────────────────────────────────── #}
+<div id="reviews" class="section-darker py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="section-subtitle">Testimonials</div>
+            <h2 class="display-4 section-heading text-center">What Our Members Say</h2>
+        </div>
+        {% component 'placesReviews' %}
+    </div>
+</div>
+
+{# ── INSTAGRAM FEED ─────────────────────────────────── #}
+<div id="instaMedia" class="section-dark py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="section-subtitle">Follow Us</div>
+            <h2 class="display-4 section-heading text-center">Instagram Feed</h2>
+        </div>
+        <div class="instagram-grid">
+            {% component 'instagramMediaList' %}
+        </div>
+    </div>
+</div>

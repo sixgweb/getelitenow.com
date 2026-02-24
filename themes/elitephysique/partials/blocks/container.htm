@@ -1,0 +1,7 @@
+<div 
+    class="w-100 {{ block.cssClass }} {{ block.width }} {{ block.background }} {{ block.color }} backdrop-blur animate__fast" 
+    style="{{ block.backgroundOpacity ? '--bs-bg-opacity:' ~ block.backgroundOpacity : '' }}"
+    {{ block.animation ? 'data-animate=' ~ block.animation : '' }}
+>
+    {% partial 'blocks/' ~ str_slug(block.type) block=block %}
+</div>

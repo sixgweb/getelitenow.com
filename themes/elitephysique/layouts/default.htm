@@ -1,0 +1,12 @@
+[collection menusCollection]
+handle = "Site\Menus"
+==
+{% set menus = menusCollection.where('pages_visibility','always').get() %}
+{% set menus = menus.merge(menusCollection.where('pages_visibility', 'includes').whereNot('pages', '').whereJsonContains('pages',this.page.baseFileName).get()) %}
+{% set menus = menus.merge(menusCollection.where('pages_visibility', 'excludes').whereNot('pages', '').whereJsonDoesntContain('pages',this.page.baseFileName).get()) %}
+
+<!doctype html>
+<html lang="en">
+    {% partial 'sections/head' %}
+    {% partial 'sections/body' %}
+</html>

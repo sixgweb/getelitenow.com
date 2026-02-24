@@ -1,0 +1,7 @@
+{% if block.url %}
+<a href="{{ block.url|link }}">
+{% endif %}
+<img src="{{ block.image|media|resize(1920, 768, {'mode': 'crop'}) }}" class="d-block w-100" alt="{{ block.title }}" />
+{% if block.url %}
+</a>
+{% endif %}

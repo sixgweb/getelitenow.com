@@ -1,0 +1,30 @@
+{% set depth = depth ?? 1 %}
+<div class="collapse" id="collapse{{ id }}" data-bs-parent="#{{ parentId }}Children">
+    <div class="list-group list-group-flush">
+        {% for accordionItem in children %}
+        {% set resolved = link(accordionItem.url) %}
+        {% put childItemActive = false %}
+        {% set hasChildren = accordionItem.children.count() > 0 %}
+        {% if hasChildren %}
+            {% partial 'sections/navigation/is-child-active' children=accordionItem.children %}
+        {% endif %}
+            <a 
+                class="ps-5 list-group-item list-group-item-action border-bottom {{ resolved.isActive or placeholder('childItemActive') ? ' active' : '' }} {{ hasChildren ? ' dropdown-toggle' : '' }} {{ accordionItem.cssClass }}" 
+                {% if hasChildren %}data-bs-toggle="dropdown" data-bs-auto-close="outside"{% endif %} 
+                href="{{ resolved.url }}"
+                {% for attr in item.attrs %}
+                {{ attr.attribute }}="{{ attr.value }}"
+                {% endfor %}
+            >
+                {% if accordionItem.icon != '' %}
+                <i class="{{ item.icon }}"></i>
+                {% endif %}
+                <span class="{{ accordionItem.icononly ? 'visually-hidden' : '' }}">{{ accordionItem.title }}</span>
+
+            </a>
+            {% if hasChildren %}
+                {% partial 'sections/navigation/type/dropdown' children=accordionItem.children depth=depth+1 %}
+            {% endif  %}
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,723 @@
+// ═══════════════════════════════════════════════════════════
+// Elite Physique Gym — Theme Stylesheet
+// A bold, modern gym aesthetic: dark grays, white, yellow
+// ═══════════════════════════════════════════════════════════
+
+// ── Custom Fonts ──────────────────────────────────────────
+@font-face {
+    font-family: 'zebulonregular';
+    src: url('../../../elitephysique/assets/fonts/zebulon-webfont.woff2') format('woff2'),
+         url('../../../elitephysique/assets/fonts/zebulon-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+// ── Imports ───────────────────────────────────────────────
+@import '../../../elitephysique/assets/scss/variables.scss';
+@import '../../../elitephysique/assets/vendor/bootstrap/scss/bootstrap';
+@import '../../../elitephysique/assets/vendor/animate.css/animate.min';
+
+// ── Turbo Preview (prevent flash of animation) ────────────
+html[data-turbo-preview] {
+    [data-animate] {
+        display: none !important;
+    }
+}
+
+// ── CSS Custom Properties ─────────────────────────────────
+:root {
+    --ep-yellow: #F0C832;
+    --ep-yellow-light: #F5D95A;
+    --ep-yellow-dark: #C9A41E;
+    --ep-dark: #171717;
+    --ep-darker: #0d0d0d;
+    --ep-gray: #262626;
+    --ep-gray-light: #404040;
+    --ep-white: #ffffff;
+    --ep-text-muted: #a3a3a3;
+
+    --text-shadow-color: rgba(0, 0, 0, 0.6);
+    --text-shadow-x: 2px;
+    --text-shadow-y: 2px;
+    --text-shadow-blur: 4px;
+
+    @each $color, $value in $grays-rgb {
+        --#{$prefix}gray-#{$color}-rgb: #{$value};
+    }
+}
+
+// ═══════════════════════════════════════════════════════════
+// GLOBAL STYLES
+// ═══════════════════════════════════════════════════════════
+
+body {
+    background-color: var(--ep-dark);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+    background-color: var(--ep-yellow);
+    color: var(--ep-dark);
+}
+
+// ── Section Styling ───────────────────────────────────────
+.section-dark {
+    background-color: var(--ep-dark);
+    color: var(--ep-white);
+}
+
+.section-darker {
+    background-color: var(--ep-darker);
+    color: var(--ep-white);
+}
+
+.section-gray {
+    background-color: var(--ep-gray);
+    color: var(--ep-white);
+}
+
+.section-light {
+    background-color: $gray-100;
+    color: $gray-900;
+}
+
+.section-white {
+    background-color: $white;
+    color: $gray-900;
+}
+
+// ── Section Headings ──────────────────────────────────────
+.section-heading {
+    position: relative;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 800;
+
+    &::after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 4px;
+        background-color: var(--ep-yellow);
+        margin-top: 0.75rem;
+    }
+
+    &.text-center::after {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.section-subtitle {
+    color: var(--ep-yellow);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+
+// ═══════════════════════════════════════════════════════════
+// TYPOGRAPHY
+// ═══════════════════════════════════════════════════════════
+
+.font-zebulon {
+    font-family: 'zebulonregular', sans-serif;
+}
+
+.text-shadow {
+    text-shadow: var(--text-shadow-x) var(--text-shadow-y) var(--text-shadow-blur) var(--text-shadow-color);
+}
+
+.text-yellow {
+    color: var(--ep-yellow) !important;
+}
+
+.text-muted-light {
+    color: var(--ep-text-muted) !important;
+}
+
+.letter-spacing-1 { letter-spacing: 1px; }
+.letter-spacing-2 { letter-spacing: 2px; }
+.letter-spacing-3 { letter-spacing: 3px; }
+.letter-spacing-4 { letter-spacing: 4px; }
+.letter-spacing-5 { letter-spacing: 5px; }
+
+// ── Underline Accent ──────────────────────────────────────
+.underlined {
+    position: relative;
+
+    &:after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        height: 0;
+        width: 100%;
+        border: inset 2px transparent;
+        border-style: inset none;
+        border-width: 1px 0 2px 0;
+        border-radius: 50%;
+    }
+
+    @each $name, $color in (
+        "primary": $primary,
+        "secondary": $secondary,
+        "success": $success,
+        "info": $info,
+        "warning": $warning,
+        "danger": $danger,
+        "dark": $dark,
+        "light": $light,
+        "black": $black,
+        "white": $white,
+        "yellow": var(--ep-yellow)
+    ) {
+        &.border-#{$name}:after {
+            border-color: $color;
+        }
+    }
+}
+
+// ═══════════════════════════════════════════════════════════
+// BUTTONS
+// ═══════════════════════════════════════════════════════════
+
+.btn {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.btn-warning {
+    color: $gray-900;
+    background-color: var(--ep-yellow);
+    border-color: var(--ep-yellow);
+
+    &:hover,
+    &:focus {
+        background-color: var(--ep-yellow-dark);
+        border-color: var(--ep-yellow-dark);
+        color: $gray-900;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(240, 200, 50, 0.3);
+    }
+}
+
+.btn-outline-warning {
+    color: var(--ep-yellow);
+    border-color: var(--ep-yellow);
+
+    &:hover,
+    &:focus {
+        background-color: var(--ep-yellow);
+        border-color: var(--ep-yellow);
+        color: $gray-900;
+        transform: translateY(-2px);
+    }
+}
+
+.btn-outline-light {
+    &:hover,
+    &:focus {
+        transform: translateY(-2px);
+    }
+}
+
+// ═══════════════════════════════════════════════════════════
+// HERO / BANNER
+// ═══════════════════════════════════════════════════════════
+
+.hero-section {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--ep-dark);
+
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 120px;
+        background: linear-gradient(to top, var(--ep-dark), transparent);
+        pointer-events: none;
+        z-index: 2;
+    }
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.7) 0%,
+        rgba(0, 0, 0, 0.4) 50%,
+        rgba(0, 0, 0, 0.6) 100%
+    );
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+// ── Hero Carousel (full-viewport background) ─────────────
+#heroCarousel {
+    .carousel-inner,
+    .carousel-item {
+        height: 100%;
+    }
+
+    .carousel-item {
+        transition: opacity 1.5s ease-in-out;
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(0, 0, 0, 0.75) 0%,
+                rgba(0, 0, 0, 0.35) 50%,
+                rgba(0, 0, 0, 0.6) 100%
+            );
+        }
+    }
+}
+
+// ── Carousel (general) ───────────────────────────────────
+.carousel-item {
+    background-position: 50% 50%;
+    background-size: cover;
+}
+
+.carousel-indicators-right {
+    left: auto;
+    top: 0;
+    right: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    flex-direction: column;
+}
+
+.carousel-indicators [data-bs-target] {
+    background-color: var(--ep-yellow);
+}
+
+// ═══════════════════════════════════════════════════════════
+// NAVBAR
+// ═══════════════════════════════════════════════════════════
+
+.navbar {
+    transition: background-color 0.3s ease;
+}
+
+.navbar-dark,
+[data-bs-theme="dark"] .navbar {
+    .nav-link {
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        padding: 0.75rem 1rem;
+        transition: color 0.3s ease;
+
+        &:hover,
+        &.active {
+            color: var(--ep-yellow) !important;
+        }
+    }
+}
+
+#navigation1 .navbar-brand img {
+    max-height: 80px;
+}
+
+@media (min-width: 992px) {
+    #navigation1 .navbar-brand {
+        height: 90px;
+        margin-top: -68px;
+
+        img {
+            max-height: 160px;
+            border-radius: 100%;
+        }
+    }
+}
+
+@media (max-width: 992px) {    
+    #navigation2 .btn {
+        letter-spacing:normal;
+    }
+}
+
+
+// ── Animated Hamburger Toggler ────────────────────────────
+.navbar-toggler.x {
+    border: none;
+
+    &:focus {
+        outline: 0;
+        box-shadow: none;
+    }
+
+    &[aria-expanded=true] {
+        .icon-bar:nth-of-type(1) {
+            transform: rotate(45deg);
+            transform-origin: 10% 10%;
+        }
+
+        .icon-bar:nth-of-type(2) {
+            opacity: 0;
+        }
+
+        .icon-bar:nth-of-type(3) {
+            transform: rotate(-45deg);
+            transform-origin: 10% 90%;
+        }
+    }
+
+    .icon-bar {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background-color: $black;
+        border-radius: 1px;
+        transition: all 0.2s;
+
+        + .icon-bar {
+            margin-top: 4px;
+        }
+    }
+}
+
+// ═══════════════════════════════════════════════════════════
+// CARDS
+// ═══════════════════════════════════════════════════════════
+
+.card-dark {
+    background-color: var(--ep-gray);
+    border: 1px solid var(--ep-gray-light);
+    color: $white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.card-feature {
+    background-color: $white;
+    border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-icon {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--ep-yellow);
+        color: var(--ep-dark);
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+}
+
+// ═══════════════════════════════════════════════════════════
+// VALUES LIST (Welcome, Respect, Encourage, Enjoy)
+// ═══════════════════════════════════════════════════════════
+
+.values-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        i {
+            color: var(--ep-yellow);
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .value-word {
+            color: var(--ep-yellow);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border-bottom: 2px solid var(--ep-yellow);
+            padding-bottom: 2px;
+        }
+    }
+}
+
+// ═══════════════════════════════════════════════════════════
+// STATS BAR
+// ═══════════════════════════════════════════════════════════
+
+.stats-bar {
+    background-color: var(--ep-yellow);
+    color: var(--ep-dark);
+
+    .stat-item {
+        text-align: center;
+        padding: 1.5rem 1rem;
+
+        .stat-number {
+            font-family: "Exo 2", sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .stat-label {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+    }
+}
+
+// ═══════════════════════════════════════════════════════════
+// GALLERY
+// ═══════════════════════════════════════════════════════════
+
+.gallery-grid {
+    a {
+        display: block;
+        overflow: hidden;
+        position: relative;
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0);
+            transition: background 0.3s ease;
+        }
+
+        &:hover {
+            &::after {
+                background: rgba(240, 200, 50, 0.15);
+            }
+
+            img {
+                transform: scale(1.05);
+            }
+        }
+
+        img {
+            transition: transform 0.5s ease;
+        }
+    }
+}
+
+// ═══════════════════════════════════════════════════════════
+// REVIEWS
+// ═══════════════════════════════════════════════════════════
+
+.review-card {
+    background-color: var(--ep-gray);
+    border-left: 4px solid var(--ep-yellow);
+    padding: 1.5rem;
+    height: 100%;
+
+    .stars {
+        color: var(--ep-yellow);
+        margin-bottom: 0.75rem;
+    }
+
+    .review-text {
+        color: $gray-300;
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+
+    .reviewer-name {
+        color: $white;
+        font-weight: 600;
+        margin-top: 1rem;
+    }
+}
+
+// ═══════════════════════════════════════════════════════════
+// FOOTER
+// ═══════════════════════════════════════════════════════════
+
+#footer {
+    background-color: var(--ep-darker) !important;
+    border-top: 4px solid var(--ep-yellow) !important;
+
+    a {
+        color: $gray-400;
+        text-decoration: none;
+        transition: color 0.3s ease;
+
+        &:hover {
+            color: var(--ep-yellow);
+        }
+    }
+}
+
+.footer-heading {
+    color: var(--ep-yellow);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+// ═══════════════════════════════════════════════════════════
+// DIVIDERS & ACCENTS
+// ═══════════════════════════════════════════════════════════
+
+.yellow-line {
+    width: 60px;
+    height: 4px;
+    background-color: var(--ep-yellow);
+
+    &.yellow-line-lg {
+        width: 100px;
+    }
+}
+
+.border-yellow {
+    border-color: var(--ep-yellow) !important;
+}
+
+.bg-yellow {
+    background-color: var(--ep-yellow) !important;
+}
+
+// ═══════════════════════════════════════════════════════════
+// OFFCANVAS
+// ═══════════════════════════════════════════════════════════
+
+.offcanvas {
+    &.bg-dark-theme {
+        background-color: var(--ep-gray);
+        color: $white;
+    }
+}
+
+// ═══════════════════════════════════════════════════════════
+// SCROLL ANIMATIONS
+// ═══════════════════════════════════════════════════════════
+
+[data-animate] {
+    will-change: opacity, transform;
+}
+
+// ═══════════════════════════════════════════════════════════
+// CTA BANNER
+// ═══════════════════════════════════════════════════════════
+
+.cta-banner {
+    background-color: var(--ep-yellow);
+    color: var(--ep-dark);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 400px;
+        height: 400px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+    }
+
+    .btn-dark {
+        background-color: var(--ep-dark);
+        border-color: var(--ep-dark);
+        color: var(--ep-yellow);
+
+        &:hover {
+            background-color: lighten($gray-900, 10%);
+            transform: translateY(-2px);
+        }
+    }
+}
+
+// ═══════════════════════════════════════════════════════════
+// RESPONSIVE HELPERS
+// ═══════════════════════════════════════════════════════════
+
+@media (max-width: 768px) {
+    .display-1 { font-size: 2.5rem; }
+    .display-2 { font-size: 2rem; }
+    .display-3 { font-size: 1.75rem; }
+    .display-4 { font-size: 1.5rem; }
+
+    .section-heading::after {
+        width: 40px;
+        height: 3px;
+    }
+}
+
+// ═══════════════════════════════════════════════════════════
+// BACKDROP BLUR (for carousel content overlays)
+// ═══════════════════════════════════════════════════════════
+
+.backdrop-blur {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+// ═══════════════════════════════════════════════════════════
+// INSTAGRAM FEED GRID
+// ═══════════════════════════════════════════════════════════
+
+.instagram-grid {
+    img {
+        transition: transform 0.5s ease, filter 0.5s ease;
+
+        &:hover {
+            transform: scale(1.03);
+            filter: brightness(1.1);
+        }
+    }
+}
+
+// ═══════════════════════════════════════════════════════════
+// SEPARATOR PATTERN
+// ═══════════════════════════════════════════════════════════
+
+.section-separator {
+    height: 6px;
+    background: linear-gradient(
+        90deg,
+        var(--ep-yellow) 0%,
+        var(--ep-yellow) 30%,
+        transparent 30%,
+        transparent 33%,
+        var(--ep-gray-light) 33%,
+        var(--ep-gray-light) 100%
+    );
+}
+

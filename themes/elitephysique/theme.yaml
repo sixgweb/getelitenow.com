@@ -1,0 +1,15 @@
+name: 'Elite Physique'
+description: 'A bold, modern gym theme for Elite Physique Gym in Rio Rancho, NM. Built on Bootstrap 5 with a dark industrial color palette — grays, whites, and yellow/gold accents.'
+author: '6G Web Design'
+homepage: 'https://www.6gwebdesign.com'
+authorCode: sixgweb
+code: elitephysique
+parent: ''
+database: '0'
+
+form:
+    fields:
+        logo:
+            label: Site logo
+            type: mediafinder
+            comment: The logo as it should appear on the front-end

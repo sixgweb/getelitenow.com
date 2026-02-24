@@ -1,0 +1,193 @@
+uuid: fe3e0a16-c083-4e96-b097-1313759998e3
+handle: Site\Menus
+type: structure
+name: Menu
+drafts: false
+pagefinder: false
+showSorting: true
+
+structure:
+    showTree: false
+    showReorder: true
+    showSorting: false
+    maxDepth: 1
+
+navigation:
+    label: Menus
+    icon: bi-diagram-3
+    order: 80
+    
+fields:
+
+    position:
+        label: Position
+        type: dropdown
+        options:
+            top: Top Navigation
+            primary: Primary Navigation
+            secondary: Secondary Navigation
+            side: Side Menu
+            bottom: Bottom Navigation
+            
+    type:
+        label: Type
+        type: balloon-selector
+        default: nav
+        options:
+            nav: Standard
+            navbar: Navigation Bar
+            tiles: Tiles
+
+    style:
+        label: Style
+        type: balloon-selector
+        options:
+            nav: Plain
+            tabs: Tabs
+            pills: Pills
+            underline: Underline
+        trigger:
+            action: show
+            field: type
+            condition: value[nav]
+
+    animation:
+        label: Dropdown animation
+        type: dropdown
+        options:
+            fadeIn: Fade In
+            fadeInUpSm: Fade In Up
+            fadeInRight: Fade In Right
+            slideInUp: Slide In Up
+            slideInRight: Slide In Right
+
+    brand:
+        label: Brand
+        trigger:
+            action: show
+            field: type
+            condition: value[navbar]
+        type: nestedform
+        form:
+            fields:
+                text:
+                    label: Text
+                image:
+                    label: Image
+                    type: mediafinder
+                    mode: image
+                url:
+                    label: URL
+
+    description:
+        label: Entry description
+        type: textarea
+        size: small
+
+    containerCssClass:
+        label: Container CSS Classes
+        type: text
+        comment: Custom CSS classes for the navigation container
+
+    cssClass:
+        label: Navigation CSS Classes
+        type: text
+        comment: Custom CSS classes for the navigation element
+
+    styles:
+        label: CSS Style
+        comment: Custom CSS style applied to navigation element
+
+    justify:
+        label: Justify Content
+        type: dropdown
+        options:
+            justify-content-start: Start
+            justify-content-center: Center
+            justify-content-end: End
+            justify-content-between: Between
+            justify-content-around: Around
+
+    attrs:
+        label: Attributes
+        type: repeater
+        form:
+            fields:
+                attribute:
+                    label: Attribute
+                    span: left
+                value:
+                    label: Value
+                    span: right
+
+    items:
+        label: Items
+        tab: Items
+        type: nesteditems
+        span: adaptive
+        maxDepth: 4
+        form:
+            fields:
+                title:
+                    label: Title
+                    type: text
+                    required: true
+
+                url:
+                    label: URL
+                    type: pagefinder
+
+                image:
+                    label: Tile Background Image
+                    type: mediafinder
+                    mode: image
+                    comment: Image used for tile menu background.
+
+                icon:
+                    label: Icon Class
+                    comment: Class used to generate menu item icon
+
+                icononly:
+                    label: Icon Only
+                    type: checkbox
+                    comment: Hide menu title and show icon only
+
+                cssClass:
+                    label: CSS Class
+                    type: text
+                    comment: Custom CSS classes for the item
+
+                containerCssClass:
+                    label: Container CSS Class
+                    type: text
+                    comment: Custom CSS classes for the item container
+
+                attrs:
+                    label: Attributes
+                    type: repeater
+                    form:
+                        fields:
+                            attribute:
+                                label: Attribute
+                                span: left
+                            value:
+                                label: Value
+                                span: right
+
+    pages_visibility:
+        label: Menu Visibility
+        type: radio
+        tab: Pages
+        options:
+            always: Always Visible
+            includes: Only on the following pages
+            excludes: Except on the following pages
+    pages:
+        label: Pages
+        type: checkboxlist
+        tab: Pages
+        options: Cms\Classes\Page::getNameList
+        trigger:
+            action: hide
+            field: pages_visibility
+            condition: value[always]

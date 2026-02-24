@@ -1,0 +1,18 @@
+uuid: cf809114-8e80-42c4-b1df-e04f14077a6b
+handle: Content\Brand
+type: structure
+name: Brands
+drafts: false
+
+navigation:
+    label: Brands
+    icon: bi-folder2
+    order: 100
+
+structure:
+    maxDepth: 1
+
+fields:
+    logo:
+        label: Logo
+        type: mediafinder

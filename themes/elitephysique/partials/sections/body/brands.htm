@@ -1,0 +1,24 @@
+[collection brandsCollection]
+handle = "Content\Brand"
+==
+<div class="bg-gray-500">
+    <div class="container py-3 position-relative z-1">
+        <div class="row flex-column align-items-center justify-content-center">
+            <div class="col-12 p-2">
+                <div class="swiper" id="brandSwiper">
+                    <div class="swiper-wrapper align-items-center">
+                        {% for brand in brandsCollection.get() %}
+                        <div class="swiper-slide p-2 text-center" {{ loop.first ? 'data-swiper-autoplay="1000"' : '' }}>
+                            <img
+                                src="{{ brand.logo|media|resize(200,200) }}" 
+                                class="img-fluid"
+                                alt="{{ brand.title }}"
+                                style="max-height:80px;" />
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+<nav 
+    class="{{ nav.cssClass != '' ? nav.cssClass : 'navbar navbar-expand-lg navbar-dark bg-dark' }}" 
+    id="navigation{{ nav.id }}" 
+    style="{{ nav.styles }}"
+    {% for attr in nav.attrs %}
+    {{ attr.attribute }}="{{ attr.value }}"
+    {% endfor %}
+>
+    <div class="container {{ nav.containerCssClass }}">
+        {% if nav.brand.url %}
+        <a class="navbar-brand p-0 position-relative z-3 animate__faster me-0 me-lg-3" href="{{ nav.brand.url }}">
+            {% if nav.brand.image %}
+                <img src="{{ nav.brand.image|media }}" class="img-fluid" alt="{{ nav.brand.text }} Logo" />
+            {% else %}
+                {{ nav.brand.text }}
+            {% endif %}
+        </a>
+        {% endif %}
+        {% partial 'sections/navigation/top' nav=menus.firstWhere('slug', 'mobile-quick-nav') %}
+        <button class="navbar-toggler x collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navigation{{ nav.id }}Collapse" aria-controls="navigation{{ nav.id }}Collapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+
+        <div class="collapse navbar-collapse {{ nav.justify }} flex-lg-grow-0" id="navigation{{ nav.id }}Collapse">
+            <ul class="navbar-nav">
+                {% for item in nav.items.toNested() %}
+                    {% set resolved = link(item.url) %}
+                    {% put childItemActive = false %}
+                    {% set hasChildren = item.children.count() > 0 %}
+                    {% if hasChildren %}
+                        {% partial 'sections/navigation/is-child-active' children=item.children %}
+                    {% endif %}
+                    <li id="navbarItem{{ loop.index }}" class="nav-item {{ resolved.isActive or placeholder('childItemActive') ? ' active' : '' }}{{ hasChildren ? ' dropdown' : '' }} {{ item.containerCssClass }}" >
+                        <a 
+                            class="nav-link {{ resolved.isActive or placeholder('childItemActive') ? 'active' : '' }} {{ hasChildren ? ' dropdown-toggle' : '' }} {{ item.cssClass }}" 
+                            {% if hasChildren %}data-bs-toggle="dropdown" data-bs-auto-close="outside"{% endif %} 
+                            href="{{ resolved.url }}" aria-expanded="false"
+                            {% for attr in item.attrs %}
+                            {{ attr.attribute }}="{{ attr.value }}"
+                            {% endfor %}
+                        >
+                            {% if item.icon != '' %}
+                            <i class="{{ item.icon }}"></i>
+                            {% endif %}
+                            <span class="{{ item.icononly ? 'visually-hidden' : '' }}">{{ item.title }}</span>
+                        </a>
+                        {% if hasChildren %}
+                            {% partial 'sections/navigation/type/dropdown' children=item.children %}
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>      
+    </div>
+</nav>

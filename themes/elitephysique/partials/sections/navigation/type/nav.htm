@@ -1,0 +1,26 @@
+<ul id="navigation{{ nav.id }}" class="nav nav-{{ nav.style }} {{ nav.position == 'side' ? 'flex-column': '' }} {{ nav.cssClass }} {{ nav.justify }}" style="{{ nav.styles }}">
+{% for item in nav.items.toNested %}
+    {% set resolved = item.url ? link(item.url) : false %}
+    {% set active = resolved.isActive %}
+    {% set hasChildren = item.children.count() > 0 %}
+    <li id="navItem{{ loop.index }}" class="nav-item {{ resolved.isActive or resolved.isChildActive ? ' active' : '' }}{{ hasChildren ? ' dropdown' : '' }} {{ item.containerCssClass }}" >
+        <a 
+            class="nav-link {{ resolved.isActive or resolved.isChildActive ? 'active' : '' }} {{ hasChildren ? ' dropdown-toggle' : '' }} {{ item.cssClass }}" 
+            {% if hasChildren %}data-bs-toggle="dropdown" data-bs-auto-close="outside"{% endif %} 
+            href="{{ resolved.url }}" 
+            aria-expanded="false"
+            {% for attr in item.attrs %}
+            {{ attr.attribute }}="{{ attr.value }}"
+            {% endfor %}
+        >
+            {% if item.icon != '' %}
+            <i class="{{ item.icon }}"></i>
+            {% endif %}
+            <span class="{{ item.icononly ? 'visually-hidden' : '' }}">{{ item.title|striptags('<br>')|raw }}</span>
+        </a>
+        {% if hasChildren %}
+            {% partial 'sections/navigation/type/dropdown' children=item.children %}
+        {% endif %}
+    </li>
+{% endfor %}
+</ul>

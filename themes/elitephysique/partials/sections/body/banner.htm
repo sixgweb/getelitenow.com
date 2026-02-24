@@ -1,0 +1,42 @@
+{% set slideshowId = slideshowId ? slideshowId :'carousel' ~ entry.banners.id %}
+{% set imageWidth = entry.banners.slideshow_image_width ?? 1920 %}
+{% set imageHeight= entry.banners.slideshow_image_height ?? 768 %}
+
+<div id="{{ slideshowId }}" class="carousel slide z-1 {{ entry.banners.slideshow_fade ? 'carousel-fade' : '' }} {{ slideshowClass }}" {{ entry.banners.slideshow_autoplay ? 'data-bs-ride="carousel"' : '' }} data-bs-interval="{{ entry.banners.slideshow_interval ?? '5000' }}">
+    {% if entry.banners.slideshow_items.count() > 1 and entry.banners.slideshow_indicators %}
+    <div class="carousel-indicators {{ entry.banners.slideshow_indicators_right ? 'carousel-indicators-right' : '' }} d-none d-lg-flex z-3">
+        {% for i in 1..entry.banners.slideshow_items.count() %}
+        <button type="button" data-bs-target="#{{ slideshowId  }}" data-bs-slide-to="{{ loop.index0 }}" class="{{ loop.first ? 'active' : '' }}" {{ loop.first ? 'aria-current="true"' : '' }} aria-label="Slide {{ loop.index }}"></button>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="carousel-inner h-100">
+        {{ entry.banners.slideshow_overlay|content }}
+        {% for item in entry.banners.slideshow_items %}
+            {% set carouselImg = item.image|media %}
+            <div class="carousel-item h-100 flex-wrapss {{ loop.first ? 'active' : '' }}" style="background-image: url({{ carouselImg }}); background-size:cover; background-position: center;">
+                {#<img src="{{ carouselImg }}" class="d-block w-100 invisible" alt="{{ item.title }}" />#}
+                {% if item.blocks %}
+                    <div class="carousel-content d-flex align-items-center justify-content-center">
+                    {% for block in item.blocks %}
+                        {% partial 'blocks/container' block=block %}
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {% if item.url %}
+                <a href="{{ item.url|link }}" class="stretched-link"></a>
+                {% endif %}
+            </div>
+        {% endfor %}
+        {% if entry.banners.slideshow_items.count() > 1 and entry.banners.slideshow_arrows %}
+            <button class="carousel-control-prev" type="button" data-bs-target="#{{ slideshowId }}" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#{{ slideshowId }}" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        {% endif %}
+    </div>
+</div>

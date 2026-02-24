@@ -1,0 +1,24 @@
+uuid: f4df0807-d710-46ac-ae2f-f26fcf998db5
+handle: Mixins\Banner
+type: mixin
+name: Banner
+
+fields:
+    image:
+        label: Image
+        type: mediafinder
+        mode: image
+        span: left
+        maxItems: 1
+        tab: Edit
+
+    url:
+        label: URL
+        type: pagefinder
+        comment: Optional URL opened when banner clicked
+        tab: Edit
+        span: right
+
+    _blocks:
+        type: mixin
+        source: Mixins\Block

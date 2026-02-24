@@ -1,0 +1,147 @@
+{% set slides = reviews.count()/3 %}
+{% set slides = slides|round(0, 'ceil') %}
+<div class="p-4">
+    <div id="reviewsCarousel" class="carousel slide">
+        {% if slides > 1 %}
+        <div class="d-flex justify-content-center mb-3">
+            {% for i in 1..slides %}
+            <a href="#" data-bs-target="#reviewsCarousel" data-bs-slide-to="{{ loop.index0 }}"
+                aria-label="Slide {{ loop.index }}" class="mx-1"><i class="bi bi-circle-fill"></i><span
+                    class="visually-hidden">Slide
+                    {{ loop.index }}</span></a>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <div class="carousel-inner">
+            {% for review in reviews %}
+            {% set days = review.created_at.diffInDays('now')|round(0, 'floor') %}
+            {% set weeks = review.created_at.diffInWeeks('now')|round(0, 'floor') %}
+            {% set months = review.created_at.diffInMonths('now')|round(0, 'floor') %}
+            {% set years = review.created_at.diffInYears('now')|round(0, 'floor') %}
+            {% if loop.first %}
+            <div class="carousel-item active">
+            {% endif %}
+                <div class="col p-2 col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="review-rating">
+                                {% for i in 1..5 %}
+                                <span aria-label="Star Rating" class="star{% if i <= review.rating %} filled{% endif %}">&#9733;</span>
+                                {% endfor %}
+                            </div>
+                            <div class="review-header">
+                                <p class="review-author h6">{{ review.author_name }}</p>
+                                <p class="review-date">
+                                    {% if years > 1 or months >= 12 %}
+                                    {{ years }} {{ 'year'|str_plural(years) }} ago
+                                    {% elseif months > 1 %}
+                                    {{ months }} {{ 'month'|str_plural(months) }} ago
+                                    {% elseif weeks > 1 %}
+                                    {{ weeks }} {{ 'week'|str_plural(weeks) }} ago
+                                    {% elseif days >= 1 %}
+                                    {{ days }} {{ 'day'|str_plural(days) }} ago
+                                    {% else %}
+                                    Today
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <div class="review-content">
+                                <div class="review-exerpt">{{ str_limit(review.text, 200, '... <a href="#"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#' ~ loop.index ~ 'reviewCollapse">more</a>')|raw }}</div>
+                                <div class="review-collapse collapse" id="{{ loop.index }}reviewCollapse">{{ review.text
+                                    }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if loop.index is divisible by(3) %}
+            </div>
+            <div class="carousel-item">
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center">
+    <a href="{{ reviews_link }}" target="_blank">View All Google Reviews</a>
+</div>
+
+<script>
+    (function () {
+        let reviewCollapsibles = document.querySelectorAll('.review-collapse');
+        reviewCollapsibles.forEach(collapse => {
+            collapse.addEventListener('show.bs.collapse', event => {
+                let target = event.target;
+                console.log(target);
+                target.previousElementSibling.style.display = 'none';
+            });
+
+            collapse.addEventListener('shown.bs.collapse', event => {
+                // do something...
+            });
+
+            collapse.addEventListener('hide.bs.collapse', event => {
+                // do something...
+            });
+
+            collapse.addEventListener('hidden.bs.collapse', event => {
+                // do something...
+            });
+        });
+    })();
+</script>
+<style>
+    .carousel-item.active,
+    .carousel-item-next,
+    .carousel-item-prev {
+        display: flex;
+        justify-content: center;
+    }
+
+    .star {
+        color: #ccc;
+        font-size: 2rem;
+    }
+
+    .star.filled {
+        color: #f39c12;
+    }
+
+    .review-rating {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .review-header {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .review-author {
+        font-weight: bold;
+        margin: 0;
+    }
+
+    .review-date {
+        color: #777;
+        margin: 0;
+    }
+
+    .review-content {
+        text-align: justify;
+    }
+
+    @media (max-width: 768px) {
+
+        .carousel-item.active,
+        .carousel-item-next,
+        .carousel-item-prev {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+</style>

@@ -1,0 +1,78 @@
+uuid: 9c239024-c0f7-40d0-b455-b3348d547822
+handle: Mixins\Slideshow
+type: mixin
+name: Slideshow
+
+fields:
+    slideshow_items:
+        label: Slideshow Items
+        type: repeater
+        tab: Slides
+        form:
+            fields:
+                _fields:
+                    type: mixin
+                    source: Mixins\Banner
+                    tab: Settings
+
+    slideshow_overlay:
+        label: Permanent Overlay
+        commentAbove: Create a permanent overlay, which images rotate behind
+        type: richeditor
+        tab: Slideshow Settings
+
+    slideshow_image_width:
+        label: Resize Image Width
+        type: number
+        default: 1920
+        tab: Slideshow Settings
+        span: left
+
+    slideshow_image_height:
+        label: Resize Image Height
+        type: number
+        default: 768
+        tab: Slideshow Settings
+        span: right
+        
+    slideshow_arrows:
+        label: Show Arrows
+        type: switch
+        tab: Slideshow Settings
+
+    slideshow_indicators:
+        label: Show Indicators
+        type: switch
+        tab: Slideshow Settings
+
+    slideshow_indicators_right:
+        label: Right Indicators
+        comment: Place indicators to right of slideshow
+        type: switch
+        tab: Slideshow Settings
+        trigger:
+            field: slideshow_indicators
+            action: show
+            condition: checked
+
+
+    slideshow_autoplay:
+        label: Autoplay
+        comment: automatically slide to next slide, after timeout
+        type: switch
+        tab: Slideshow Settings
+
+    slideshow_interval:
+        label: Autoplay Interval
+        comment: miliseconds to wait between slides
+        tab: Slideshow Settings
+        default: 5000
+        trigger:
+            field: slideshow_autoplay
+            action: show
+            condition: checked
+
+    slideshow_fade:
+        label: Use Fade Transition
+        type: switch
+        tab: Slideshow Settings

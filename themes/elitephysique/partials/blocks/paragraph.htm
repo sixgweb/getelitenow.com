@@ -1,0 +1,20 @@
+<div class="container">
+    {% if block.title %}
+    <div class="{{ block.titleSize }} {{ block.titleAlign }} {{ block.subtitle ? 'mb-0' : '' }}">{{ block.title }}</div>
+    {% endif %}
+    {% if block.title %}
+    <div class="{{ block.subTitleSize }}">{{ block.subtitle }}</div>
+    {% endif %}
+    <div class="row">
+        {% if block.content %}
+        <div class="col-12 {{ block.image_placement == 'left' ? 'order-last' : 'order-first' }} {{ block.image ? 'col-md-9' : '' }}">
+            {{ block.content|content }}
+        </div>
+        {% endif %}
+        {% if block.image %}
+        <div class="{{ block.content ? 'col-md-3' : 'col-12' }} {{ block.image_placement == 'left' ? 'order-first' : 'order-last' }}">
+            <img src="{{ block.image|media }}" alt="{{ block.title }}" class="img-fluid rounded shadow-sm border border-light" />
+        </div>
+        {% endif %}
+    </div>
+</div>

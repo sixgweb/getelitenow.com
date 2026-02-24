@@ -1,0 +1,91 @@
+uuid: 980482fd-b437-4870-9736-4ae4eaf4263f
+name: Paragraph Block
+type: mixin
+handle: Mixins\Block\Paragraph
+
+fields:
+    title:
+        label: Title
+        type: text
+        tab: Edit
+        span: row
+        cssClass: col-12 col-md-6
+
+    titleSize:
+        label: Title Size
+        type: dropdown
+        default: h2
+        tab: Edit
+        span: row
+        cssClass: col-12 col-md-3
+        options:
+            display-1: Display 1
+            display-2: Display 2
+            display-3: Display 3
+            display-4: Display 4
+            h1: H1
+            h2: H2
+            h3: H3
+            h4: H4
+            h5: H5
+            h6: H6
+
+    titleAlign:
+        label: Title Align
+        type: dropdown
+        default: left
+        tab: Edit
+        span: row
+        cssClass: col-12 col-md-3
+        options:
+            text-start: Left
+            text-center: Center
+            text-end: Right
+
+    subtitle:
+        label: Sub Title
+        type: text
+        tab: Edit
+        span: left
+
+    subTitleSize:
+        label: Sub Title Size
+        type: dropdown
+        default: h4
+        tab: Edit
+        span: right
+        options:
+            display-1: Display 1
+            display-2: Display 2
+            display-3: Display 3
+            display-4: Display 4
+            h1: H1
+            h2: H2
+            h3: H3
+            h4: H4
+            h5: H5
+            h6: H6
+
+    content:
+        label: Description
+        type: richeditor
+        size: large
+        tab: Edit
+
+    image:
+        label: Image
+        type: mediafinder
+        mode: image
+        span: left
+        maxItems: 1
+        tab: Edit
+
+    image_placement:
+        label: Image Placement
+        type: dropdown
+        default: right
+        span: right
+        tab: Edit
+        options:
+            left: Left
+            right: Right

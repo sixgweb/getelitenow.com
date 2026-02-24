@@ -1,0 +1,28 @@
+uuid: 875edcf7-71de-443b-a282-80dc88bf3ff6
+handle: Gallery
+type: entry
+name: Galleries
+drafts: false
+pagefinder: false
+
+navigation:
+    icon: bi-image
+    order: 90
+
+fields:    
+
+    title:
+        label: Title
+        type: text
+        hidden: true # This hides the field from the user interface
+
+    slug:
+        label: Title
+        type: text
+        hidden: true # This hides the field from the user interface
+                
+    media:
+        label: Media
+        type: mediafinder
+        maxItems: false
+        mode: image

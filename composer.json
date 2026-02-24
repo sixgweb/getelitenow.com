@@ -1,0 +1,104 @@
+{
+    "name": "october/october",
+    "description": "Built using October CMS: The Laravel-Based CMS Engineered For Simplicity",
+    "type": "project",
+    "homepage": "https://octobercms.com",
+    "license": "proprietary",
+    "require": {
+        "php": "^8.2",
+        "october/rain": "^4.1",
+        "laravel/framework": "^12.0",
+        "october/all": "^4.1",
+        "sixgweb/placesreviews-plugin": "dev-main",
+        "sixgweb/attributize-plugin": "3.x-dev",
+        "sixgweb/conditions-plugin": "3.x-dev",
+        "sixgweb/conditionsattributize-plugin": "^1.0",
+        "sixgweb/forms-plugin": "dev-main",
+        "rainlab/notify-plugin": "^1.2",
+        "sixgweb/notifyforms-plugin": "^1.0",
+        "sixgweb/recaptcha-plugin": "dev-main",
+        "sixgweb/recaptchaforms-plugin": "dev-main"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.5|^9.0",
+        "squizlabs/php_codesniffer": "^3.11"
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ],
+        "post-autoload-dump": [
+            "System\\Console\\ComposerScript::postAutoloadDump"
+        ],
+        "post-update-cmd": [
+            "System\\Console\\ComposerScript::postUpdateCmd"
+        ],
+        "pre-package-uninstall": [
+            "System\\Console\\ComposerScript::prePackageUninstall"
+        ],
+        "test": [
+            "phpunit --stop-on-failure"
+        ],
+        "lint": [
+            "phpcs"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist",
+        "allow-plugins": {
+            "composer/installers": true
+        },
+        "audit": {
+            "block-insecure": false
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "System\\Console\\": "modules/system/console"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "repositories": {
+        "sixgweb/attributize-plugin": {
+            "type": "git",
+            "url": "git@github.com:sixgweb/attributize-plugin.git"
+        },
+        "sixgweb/conditions-plugin": {
+            "type": "git",
+            "url": "git@github.com:sixgweb/conditions-plugin.git"
+        },
+        "sixgweb/conditionsattributize-plugin": {
+            "type": "git",
+            "url": "git@github.com:sixgweb/conditionsattributize-plugin.git"
+        },
+        "sixgweb/forms-plugin": {
+            "type": "git",
+            "url": "git@github.com:sixgweb/forms-plugin.git"
+        },
+        "sixgweb/notifyforms-plugin": {
+            "type": "git",
+            "url": "git@github.com:sixgweb/notifyforms-plugin.git"
+        },
+        "sixgweb/placesreviews-plugin": {
+            "type": "git",
+            "url": "git@github.com:sixgweb/placesreviews-plugin.git"
+        },
+        "sixgweb/recaptcha-plugin": {
+            "type": "git",
+            "url": "git@github.com:sixgweb/recaptcha-plugin.git"
+        },
+        "sixgweb/recaptchaforms-plugin": {
+            "type": "git",
+            "url": "git@github.com:sixgweb/recaptchaforms-plugin.git"
+        },
+        "octobercms": {
+            "type": "composer",
+            "url": "https://gateway.octobercms.com",
+            "only": ["october/*", "*-plugin", "*-theme"]
+        }
+    }
+}

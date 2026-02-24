@@ -1,0 +1,30 @@
+{% set depth = depth ?? 1 %}
+<ul class="dropdown-menu">
+    {% for dropdownItem in children %}
+    {% set resolved = link(dropdownItem.url) %}
+    {% put childItemActive = false %}
+    {% set hasChildren = dropdownItem.children.count() > 0 %}
+    {% if hasChildren %}
+        {% partial 'sections/navigation/is-child-active' children=dropdownItem.children %}
+    {% endif %}
+    <li id="{{ id }}dropdowntItem{{ depth }}{{ loop.index }}" class="{{ dropdownItem.containerCssClass }} {{ hasChildren ? ' dropend' : '' }}">
+        <a 
+            class="dropdown-item{{ resolved.isActive or placeholder('childItemActive') ? ' active' : '' }} {{ hasChildren ? ' dropdown-toggle' : '' }} {{ dropdownItem.cssClass }}" 
+            {% if hasChildren %}data-bs-toggle="dropdown" data-bs-auto-close="outside"{% endif %} 
+            href="{{ resolved.url }}"
+            {% for attr in item.attrs %}
+            {{ attr.attribute }}="{{ attr.value }}"
+            {% endfor %}
+        >
+            {% if dropdownItem.icon != '' %}
+            <i class="{{ item.icon }}"></i>
+            {% endif %}
+            <span class="{{ dropdownItem.icononly ? 'visually-hidden' : '' }}">{{ dropdownItem.title }}</span>
+
+        </a>
+        {% if hasChildren %}
+            {% partial 'sections/navigation/type/dropdown' children=dropdownItem.children depth=depth+1 %}
+        {% endif  %}
+    </li>
+    {% endfor %}
+</ul>

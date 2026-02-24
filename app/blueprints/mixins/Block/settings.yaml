@@ -1,0 +1,83 @@
+uuid: 80995d96-82f6-40c1-973c-4faf41cda430
+handle: Mixins\Block\Settings
+type: mixin
+name: Block Settings
+
+fields:        
+    width:
+        label: Block Width
+        type: radio
+        default: full
+        inlineOptions: true
+        tab: Block Settings
+        options:
+            full: Full
+            container: Contained
+
+    background:
+        label: Background
+        type: dropdown
+        span: row
+        cssClass: col-12 col-lg-4
+        tab: Block Settings
+        emptyOption: -- none --
+        options:
+            bg-white: White
+            bg-black: Black
+            bg-dark: Dark
+            bg-light: Light
+            bg-primary: Primary
+            bg-secondary: Secondary
+            bg-success: Success
+            bg-info: Info
+            bg-warning: Warning
+            bg-danger: Danger
+
+    backgroundOpacity:
+        label: Background Opacity
+        type: dropdown
+        default: 1
+        tab: Block Settings
+        span: row
+        cssClass: col-12 col-lg-4
+        options:
+            1: 100%
+            '.75': 75%
+            '.50': 50%
+            '.25': 25%
+
+    color:
+        label: Text Color
+        type: dropdown
+        span: row
+        cssClass: col-12 col-lg-4
+        tab: Block Settings
+        emptyOption: -- default --
+        options:
+            text-white: White
+            text-black: Black
+            text-dark: Dark
+            text-light: Light
+            text-primary: Primary
+            text-secondary: Secondary
+            text-success: Success
+            text-info: Info
+            text-warning: Warning
+            text-danger: Danger
+
+    animation:
+        label: Animation
+        type: dropdown
+        tab: Block Settings
+        emptyOption: -- none --
+        options:
+            fadeIn: Fade In
+            fadeInUp: Fade In Up
+            fadeInDown: Fade In Down
+            fadeInLeft: Fade In Left
+            fadeInRight: Fade In Right
+
+    cssClass:
+        label: CSS Classes
+        type: text
+        tab: Block Settings

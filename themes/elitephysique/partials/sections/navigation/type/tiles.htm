@@ -1,0 +1,152 @@
+{% set nestedItems = nav.items.toNested() %}
+{% set oddNumberOfTiles = nestedItems.count() is odd %}
+
+<div class="tile-container d-flex align-items-center justify-content-center flex-wrap">
+    <div class="row row-cols-1 row-cols-lg-3 g-3">
+        {% for item in nestedItems %}
+        {% set resolved = link(item.url) %}
+        {% put childItemActive = false %}
+        {% set hasChildren = item.children.count() > 0 %}
+        {% if hasChildren %}
+        {% partial 'sections/navigation/is-child-active' children=item.children %}
+        {% endif %}
+        <div class="col {{ loop.first and oddNumberOfTiles ? 'col-lg-12' : 'col' }}" id="tileNavItem{{ item.id }}">
+            <div class="tile {{ loop.first and oddNumberOfTiles ? 'aspect4to1' : 'aspect1to1' }}" tabindex="0" role="link">
+                <div class="tile-inner {{ item.children ? 'tile-inner-has-children' : '' }}">
+                    <a class="d-flex align-items-center text-center justify-content-center text-decoration-none tile-orange tile-front fs-3 fw-bolder mb-0 text-dark {{ loop.first and oddNumberOfTiles ? 'aspect4to1' : 'aspect1to1' }} {{ item.cssClass }}"
+                    style="{{ item.image ? 'background-image: url(' ~ item.image|media|resize(600) ~ ');' : '' }}"
+                        href="{{ resolved.url }}" {% for attr in
+                        item.attrs %} {{ attr.attribute }}="{{ attr.value }}" {% endfor %}>
+                        {% if item.icon != '' %}
+                        <i class="{{ item.icon }}"></i>
+                        {% endif %}
+                        <span class="tile-title {{ item.icononly ? 'visually-hidden' : item.image ? 'w-100 text-white p-2' : '' }}">{{ item.title }}</span>
+                    </a>
+                    <div class="tile-back h-100 d-flex flex-column justify-content-center align-items-center bg-white border overflow-y-auto" style="aspect-ratio: 1/1;">
+                        <div class="list-group list-group-flush w-100 h-100" id="{{ item.id }}Children">
+                        {% for child in item.children %}
+                        {% set hasGrandChildren = child.children.count() > 0 %}
+                        {% if hasGrandChildren %}
+                            <a 
+                                class="list-group-item list-group-item-action" 
+                                href="{{ child.url|link }}"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapse{{ child.id }}"
+                                aria-expanded="false"
+                                aria-controls="collapse{{ child.id }}"
+                                role="button"
+                            >{{ child.title }}</a>
+                            {% partial 'sections/navigation/type/accordion' children=child.children id=child.id parentId=item.id %}
+                        {% else %}
+                            <a class="list-group-item list-group-item-action border-bottom" href="{{ child.url|link }}">{{ child.title }}</a>
+                        {% endif %}
+                        {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% put styles %}
+<style>
+
+.aspect1to1, .aspect4to1 {
+    aspect-ratio:1/1;
+}
+
+@media (min-width: 975px) {
+    .aspect4to1 {
+        aspect-ratio:4/1;
+    }
+}
+
+.tile {
+  overflow: hidden;
+  perspective: 1000px;
+}
+
+.tile-inner {
+  display: grid;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.tile-inner-has-children.flipped, .tile-inner-has-children:focus-within {
+  transform: rotateY(180deg);
+}
+
+.tile-front,
+.tile-back {
+  grid-area: 1/1;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.tile-back {
+  transform: rotateY(180deg);
+}
+
+.tile-title {
+    background: rgba(0,0,0, 0.4);
+    backdrop-filter: blur(4px);
+}
+
+.tile-front {
+    background-color: #fff;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: luminosity;
+    transition: transform .2s; 
+}
+
+.tile-front:hover {
+    background-blend-mode: normal;
+    transform: scale(1.05);
+}
+</style>
+{% endput %}
+
+{% put scripts %}
+<script>
+(function() {
+addEventListener('page:load', function () {
+    const tiles = document.querySelectorAll('.tile');
+    tiles.forEach(tile => {
+        ['click', 'keydown'].forEach(event => {
+            tile.addEventListener(event, function (e) {
+                if (event == 'keydown') {
+                    let pressed = e.key !== undefined ? e.key : e.keyCode;
+                    if (pressed != 'Enter' && pressed != 13) {
+                        return;
+                    }
+                }
+                let anchor = e.target.tagName == 'a' ? e.target : e.target.closest('a');
+                anchor = anchor ? anchor : e.target.querySelector('a');
+                if (!anchor) {
+                    return;
+                }
+
+                if (typeof anchor.href != 'undefined' && anchor.attributes.href.value != '' && (anchor.attributes.href.value != '#' || anchor.classList.contains('list-group-item'))) {
+                    console.log(anchor);
+                    return; // Ignore clicks on links
+                }
+                tiles.forEach(t => {
+                    if (t !== this) {
+                        t.querySelector('.tile-inner').classList.remove('flipped');
+                    }
+                });
+                if (this.querySelector('.tile-back')) {
+                    e.preventDefault();
+                    this.querySelector('.tile-inner').classList.add('flipped');
+                }
+            });
+        });
+    });
+});
+})();
+</script>
+{% endput %}

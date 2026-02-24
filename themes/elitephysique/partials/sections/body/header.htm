@@ -1,0 +1,10 @@
+<header>
+    <div class="row g-0">
+        <div class="col-12 order-2 order-lg-1">
+            {% partial 'sections/navigation/top' nav=menus.firstWhere('position', 'top') %}
+        </div>
+        <div class="col-12 order-1 order-lg-2">
+            {% partial 'sections/navigation/primary' nav=menus.firstWhere('position', 'primary') %}
+        </div>
+    </div>
+</header>

@@ -1,0 +1,39 @@
+<div class="offcanvas offcanvas-start" tabindex="-1" id="contactOffCanvas" aria-labelledby="offcanvasLabel" data-bs-theme="dark" style="min-width:50vw; background-color: var(--ep-gray);">
+    <div class="offcanvas-header d-flex justify-content-between border-bottom border-gray-700">
+        <span class="text-yellow text-uppercase letter-spacing-2 fw-bold">Contact Us</span>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="mb-4">
+            <div class="row">
+                <div class="col-12 col-xl-4 offset-xl-2 text-center text-xl-end">
+                    <img src="{{ 'logos/logo.png'|media }}" class="img-fluid" alt="{{ this.site.name }} Logo" style="max-height:200px;" />
+                </div>
+                <div class="col-12 col-xl-4 d-flex align-items-center justify-content-center">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2">
+                            <div class="btn btn-outline-warning btn-sm w-100 text-start">
+                                <i class="bi bi-person-fill pe-2 border-end border-yellow"></i><span class="ps-2">Ryan Showers</span>
+                            </div>
+                        </li>
+                        <li class="mb-2">
+                            <a class="btn btn-outline-warning btn-sm w-100 text-start" href="mailto:support@6gwebdesign.com">
+                                <i class="bi bi-send-fill pe-2 border-end border-yellow"></i>
+                                <span class="ps-2 small">support@6gwebdesign.com</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="btn btn-outline-warning btn-sm w-100 text-start" href="tel:5057507655">
+                                <i class="bi bi-telephone-fill pe-2 border-end border-yellow"></i>
+                                <span class="ps-2 small">505.750.7655</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="fw-light px-xl-5 mx-xl-5">
+            {% component 'contactForm' %}
+        </div>
+    </div>
+</div>

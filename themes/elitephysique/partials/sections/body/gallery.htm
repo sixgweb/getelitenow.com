@@ -1,0 +1,11 @@
+[collection galleryCollection]
+handle = "Gallery"
+==
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-2 lightgallery gallery-grid">
+{% for image in galleryCollection.get() %}
+    <a href="{{ image.media|media}}" class="col">
+        <img src="{{ image.media|media|resize(600,600, {'mode':'crop'}) }}" alt="{{ image.title ?? 'Elite Physique Gym Rio Rancho Image ' ~ loop.index }}" class="img-fluid w-100" />
+    </a>
+{% endfor %}
+</div>

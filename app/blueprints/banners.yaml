@@ -1,0 +1,25 @@
+uuid: 9380e764-e095-4adc-aa28-52405aa2b2c8
+handle: Content\Banner
+type: entry
+name: Banners
+drafts: false
+
+navigation:
+    label: Banners
+    icon: bi-images
+    order: 90
+
+fields:
+    title:
+        label: Title
+
+    banners:
+        type: nestedform
+        useTabs: true
+        showPanel: false
+        form:
+            tabs:
+                fields:
+                    _banners:
+                        type: mixin
+                        source: Mixins\Slideshow

@@ -1,0 +1,129 @@
+// ═══════════════════════════════════════════════════════════
+// Elite Physique Gym — Bootstrap 5 Variable Overrides
+// Palette: Industrial grays · White · Yellow/Gold accents
+// Inspired by gym interior photography
+// ═══════════════════════════════════════════════════════════
+
+// ── Navbar Reset ──────────────────────────────────────────
+$navbar-toggler-transition: none;
+$navbar-toggler-padding-y: 0;
+$navbar-toggler-padding-x: 0;
+
+// ── Brand Colors ──────────────────────────────────────────
+$blue:    #315276;
+$indigo:  #6D39D1;
+$purple:  #8039D1;
+$pink:    #D139B0;
+$red:     #c45c5e;
+$orange:  #D18839;
+$yellow:  #F0C832;
+$green:   #6db575;
+$teal:    #39D1BF;
+$cyan:    #499cac;
+
+// ── Gray Scale (industrial gym tones) ─────────────────────
+$white:    #ffffff;
+$gray-100: #f5f5f5;
+$gray-200: #e5e5e5;
+$gray-300: #d4d4d4;
+$gray-400: #a3a3a3;
+$gray-500: #737373;
+$gray-600: #525252;
+$gray-700: #404040;
+$gray-800: #262626;
+$gray-900: #171717;
+
+// ── Bootstrap Functions & Defaults ────────────────────────
+@import '../../../elitephysique/assets/vendor/bootstrap/scss/functions';
+@import '../../../elitephysique/assets/vendor/bootstrap/scss/variables';
+
+// ── Utilities Extensions ──────────────────────────────────
+$utilities: (
+    "min-viewport-height": (
+        property: min-height,
+        class: min-vh,
+        values: (
+            25: 25vh,
+            50: 50vh,
+            75: 75vh,
+            100: 100vh
+        )
+    )
+);
+
+@function rgba-css-grays($identifier, $value, $target) {
+    @return rgba(var(--#{$prefix}gray-#{$identifier}-rgb), var(--#{$prefix}#{$target}-opacity));
+}
+
+$grays-rgb: map-loop($grays, to-rgb, "$value");
+$grays-rgb-bg: map-loop($grays-rgb, rgba-css-grays, "$key", "$value", "bg");
+
+$utilities: map-merge(
+  (
+    "grays": (
+      property: background-color,
+      class: "bg-gray",
+      local-vars: (
+        "bg-opacity": 1
+      ),
+      values: $grays-rgb-bg
+    ),
+    "text-grays": (
+      property: color,
+      class: "text-gray",
+      values: $grays
+    ),
+    "border-grays": (
+      property: border-color,
+      class: "border-gray",
+      values: $grays
+    )
+  ),
+  $utilities
+);
+
+// ── Named Colors Map ──────────────────────────────────────
+$colors: (
+  "blue":       $blue,
+  "blue-200":   $blue-200,
+  "indigo":     $indigo,
+  "purple":     $purple,
+  "pink":       $pink,
+  "red":        $red,
+  "orange":     $orange,
+  "yellow":     $yellow,
+  "green":      $green,
+  "teal":       $teal,
+  "cyan":       $cyan,
+  "black":      $black,
+  "white":      $white,
+  "gray":       $gray-600,
+  "gray-dark":  $gray-800
+);
+
+// ── Link & Layout ─────────────────────────────────────────
+$link-color: $yellow;
+$link-hover-color: darken($yellow, 10%);
+$enable-negative-margins: true;
+
+// ── Typography ────────────────────────────────────────────
+$font-family-sans-serif: "SN Pro", sans-serif;
+$headings-font-family: "Exo 2", sans-serif;
+$display-font-weight: 800;
+$headings-font-weight: 700;
+
+// ── Component Overrides ───────────────────────────────────
+$btn-border-radius: 0;
+$btn-border-radius-lg: 0;
+$btn-border-radius-sm: 0;
+$btn-font-weight: 700;
+$btn-padding-x: 2rem;
+$btn-padding-y: .75rem;
+$btn-text-transform: uppercase;
+
+$card-border-radius: 0;
+$card-border-width: 0;
+
+$input-border-radius: 0;
+$input-border-radius-lg: 0;
+$input-border-radius-sm: 0;

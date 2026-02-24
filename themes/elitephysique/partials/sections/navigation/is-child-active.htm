@@ -1,0 +1,9 @@
+{% for child in children %}
+    {% set resolvedChild = link(child.url) %}
+    {% if resolvedChild.isActive %}
+        {% put childItemActive = true %}
+    {% endif %}
+    {% if child.children.count() %}
+        {% partial 'sections/navigation/is-child-active' children=child.children%}
+    {% endif %}
+{% endfor %}

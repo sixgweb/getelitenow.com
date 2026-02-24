@@ -1,0 +1,74 @@
+[notification]
+notification = "join-now"
+==
+{% partial 'sections/body/brands.htm' %}
+
+<div id="footer" class="text-light p-5">
+    <div class="container">
+        <div class="row g-4">
+            {# ── Brand Column ─────────────────────── #}
+            <div class="col-lg-4 text-center text-lg-start">
+                <div class="mb-3">
+                    <img src="{{ 'logos/elite-physique-gym-logo-image-216w.png'|media }}" class="img-fluid" alt="{{ this.site.name }} Logo" style="max-width:120px" />
+                </div>
+                <h1 class="visually-hidden">{{ this.site.name }}</h1>
+                <div class="text-yellow fw-bold text-uppercase letter-spacing-3 mb-3" style="font-size: 0.85rem;">Challenge the Athlete in You</div>
+                <p class="text-gray-400 small mb-0">
+                    Elite Physique Gym is Rio Rancho's premier fitness facility, 
+                    offering personal training, group classes, and a supportive 
+                    community for all fitness levels.
+                </p>
+            </div>
+
+            {# ── Quick Links Column ───────────────── #}
+            <div class="col-lg-4 text-center">
+                <div class="footer-heading">Quick Links</div>
+                {% partial 'sections/navigation/bottom' nav=menus.firstWhere('position', 'bottom') %}
+            </div>
+
+            {# ── Contact / Hours Column ───────────── #}
+            <div class="col-lg-4 text-center text-lg-end">
+                <div class="footer-heading">Visit Us</div>
+                <ul class="list-unstyled text-gray-400 small">
+                    <li class="mb-2">
+                        <i class="bi bi-geo-alt-fill text-yellow me-1"></i>
+                        Rio Rancho, NM
+                    </li>
+                    <li class="mb-3">
+                        <i class="bi bi-telephone-fill text-yellow me-1"></i>
+                        <a href="tel:5058921890" class="text-gray-400">(505) 892-1890</a>
+                    </li>
+                </ul>
+                <div class="d-flex gap-2 justify-content-center justify-content-lg-end">
+                    <button class="btn btn-sm btn-outline-warning" data-bs-target="#tourModal" data-bs-toggle="modal">
+                        <i class="bi bi-camera-video me-1"></i> Virtual Tour
+                    </button>
+                    <button class="btn btn-sm btn-warning" data-bs-target="#packagesOffcanvas" data-bs-toggle="offcanvas">
+                        <i class="bi bi-lightning-fill me-1"></i> Join Now
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        {# ── Bottom Bar ───────────────────────────── #}
+        <div class="border-top border-gray-700 mt-4 pt-4">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <small class="text-gray-500">
+                        &copy; {{ 'now'|date('Y') }} {{ this.site.name }}. All rights reserved.
+                    </small>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <small>
+                        <a class="text-gray-500" href="https://6gwebdesign.com">Web Development by 6G Web Design</a>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% partial 'sections/body/packages' %}
+{% partial 'sections/body/tour.htm' %}
+
+{% component 'notification' %}

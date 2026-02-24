@@ -1,0 +1,43 @@
+{% set pageTitle = this.page.meta_title ?? this.page.title %}
+{% set pageTitleSuffix = this.site.name ? ' | ' ~ this.site.name : '' %}
+
+<head>
+    <title>{{ pageTitle ~ pageTitleSuffix }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ this.page.meta_description }}">
+    <meta name="keywords" content="{{ meta_keywords }}">
+    {% meta %}
+
+    <meta property="og:site_name" content="{{ this.site.name }}">
+    <meta property="og:title" content="{{ this.page.meta_title ?? this.page.title }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ this.page.url }}">
+    <meta property="og:description" content="{{ this.page.meta_description }}">
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="{{ pageTitle }}"/>
+    <meta name="twitter:description" content="{{ this.page.meta_description }}"/>
+
+    <link rel="canonical" href="{{ env('APP_URL') }}/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="{{ 'assets/vendor/bootstrap-icons/font/bootstrap-icons.min.css'|theme }}">
+    <link rel="stylesheet" href="{{ 'assets/vendor/lightgallery/css/lightgallery.css'|theme }}">
+    <link rel="stylesheet" href="{{ [
+        'assets/scss/theme.scss'
+    ] | theme }}">
+    {% styles %}
+
+    {% framework extras %}
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="{{ [
+        'assets/vendor/@popperjs/core/dist/umd/popper.min.js',
+        'assets/vendor/bootstrap/dist/js/bootstrap.min.js',
+        'assets/vendor/lightgallery/lightgallery.min.js',
+        'assets/js/app.js',
+    ] | theme }}"></script>
+    {% scripts %}
+</head>
