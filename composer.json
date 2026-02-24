@@ -11,9 +11,11 @@
         "october/all": "^4.1",
         "sixgweb/placesreviews-plugin": "dev-main",
         "sixgweb/attributize-plugin": "3.x-dev",
+        "sixgweb/clubready-plugin": "dev-main",
         "sixgweb/conditions-plugin": "3.x-dev",
         "sixgweb/conditionsattributize-plugin": "^1.0",
         "sixgweb/forms-plugin": "dev-main",
+        "sixgweb/instagrammedia-plugin": "dev-main",
         "rainlab/notify-plugin": "^1.2",
         "sixgweb/notifyforms-plugin": "^1.0",
         "sixgweb/recaptcha-plugin": "dev-main",
@@ -67,6 +69,10 @@
             "type": "git",
             "url": "git@github.com:sixgweb/attributize-plugin.git"
         },
+        "sixgweb/clubready-plugin": {
+            "type": "git",
+            "url": "git@github.com:sixgweb/clubready-plugin.git"
+        },
         "sixgweb/conditions-plugin": {
             "type": "git",
             "url": "git@github.com:sixgweb/conditions-plugin.git"
@@ -78,6 +84,10 @@
         "sixgweb/forms-plugin": {
             "type": "git",
             "url": "git@github.com:sixgweb/forms-plugin.git"
+        },
+        "sixgweb/instagrammedia-plugin": {
+            "type": "git",
+            "url": "git@github.com:sixgweb/instagrammedia-plugin.git"
         },
         "sixgweb/notifyforms-plugin": {
             "type": "git",
