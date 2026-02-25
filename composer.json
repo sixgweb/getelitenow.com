@@ -18,6 +18,7 @@
         "sixgweb/instagrammedia-plugin": "dev-main",
         "rainlab/notify-plugin": "^1.2",
         "sixgweb/notifyforms-plugin": "^1.0",
+        "sixgweb/notifications-plugin": "dev-main",
         "sixgweb/recaptcha-plugin": "dev-main",
         "sixgweb/recaptchaforms-plugin": "dev-main"
     },
@@ -92,6 +93,10 @@
         "sixgweb/notifyforms-plugin": {
             "type": "git",
             "url": "git@github.com:sixgweb/notifyforms-plugin.git"
+        },
+        "sixgweb/notifications-plugin": {
+            "type": "git",
+            "url": "git@github.com:sixgweb/notifications-plugin.git"
         },
         "sixgweb/placesreviews-plugin": {
             "type": "git",
