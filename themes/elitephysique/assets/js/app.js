@@ -41,7 +41,7 @@ let animateObserver = new IntersectionObserver(entries => {
         // Init lightGallery
         document.querySelectorAll('.lightgallery').forEach(element => {
             lightGallery(element, {
-                plugins: [],
+                plugins: [lgVideo],
                 speed: 500,
                 download: false,
             });

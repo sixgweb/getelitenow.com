@@ -29,3 +29,9 @@ fields:
         type: mediafinder
         maxItems: 1
         mode: image
+
+    video:
+        label: Video
+        type: mediafinder
+        mode: file
+        maxItems: 1

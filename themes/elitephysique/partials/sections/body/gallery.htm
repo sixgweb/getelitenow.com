@@ -4,9 +4,20 @@ sortColumn = "sort_order"
 sortDirection = "desc"
 ==
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-2 lightgallery gallery-grid">
-{% for image in galleryCollection.get() %}
-    <a href="{{ image.media|media}}" class="col">
-        <img src="{{ image.media|media|resize(600,600, {'mode':'crop'}) }}" alt="{{ image.title ?? 'Elite Physique Gym Rio Rancho Image ' ~ loop.index }}" class="img-fluid w-100" />
+{% for gallery in galleryCollection.get() %}
+    <a 
+        {% if gallery.video %}
+        {{ gallery.video_size ? 'data-lg-size="' ~ gallery.video_size ~ '"' : '' }}
+        data-video='{"source": [{"src":"{{ gallery.video|media }}", "type":"video/mp4"}], "attributes": {"preload": false, "controls": true}}'
+        data-poster="{{ gallery.media|media|resize(600,600, {'mode':'crop'}) }}"
+        {% else %}
+        href="{{ gallery.media|media }}"
+        {% endif %}
+        class="col">
+        <img src="{{ gallery.media|media|resize(600,600, {'mode':'crop'}) }}" alt="{{ gallery.title ?? 'Elite Physique Gym Rio Rancho ' ~ (gallery.video ? 'Video ' : 'Image ') ~ loop.index }}" class="img-fluid w-100" />
+        {% if gallery.video %}
+        <span class="position-absolute top-50 start-50 translate-middle"><i class="bi bi-play-circle-fill fs-1 text-white"></i></span>
+        {% endif %}
     </a>
 {% endfor %}
 </div>
