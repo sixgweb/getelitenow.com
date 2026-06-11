@@ -22,16 +22,16 @@
             <div class="carousel-item active">
             {% endif %}
                 <div class="col p-2 col-lg-4">
-                    <div class="card">
+                    <div class="card h-100">
                         <div class="card-body">
-                            <div class="review-rating">
+                            <div class="review-rating bg-secondary">
                                 {% for i in 1..5 %}
-                                <span aria-label="Star Rating" class="star{% if i <= review.rating %} filled{% endif %}">&#9733;</span>
+                                <span aria-label="Star Rating" class="star {{ i <= review.rating ? 'text-warning' : 'text-secondary' }}">&#9733;</span>
                                 {% endfor %}
                             </div>
                             <div class="review-header">
                                 <p class="review-author h6">{{ review.author_name }}</p>
-                                <p class="review-date">
+                                <p class="review-date text-muted">
                                     {% if years > 1 or months >= 12 %}
                                     {{ years }} {{ 'year'|str_plural(years) }} ago
                                     {% elseif months > 1 %}
@@ -46,9 +46,9 @@
                                 </p>
                             </div>
                             <div class="review-content">
-                                <div class="review-exerpt">{{ str_limit(review.text, 200, '... <a href="#"
+                                <div class="review-excerpt">{{ str_limit(review.text, 200, '... <a class="text-secondary" href="#"
                                         data-bs-toggle="collapse"
-                                        data-bs-target="#' ~ loop.index ~ 'reviewCollapse">more</a>')|raw }}</div>
+                                        data-bs-target="#' ~ loop.index ~ 'reviewCollapse">expand</a>')|raw }}</div>
                                 <div class="review-collapse collapse" id="{{ loop.index }}reviewCollapse">{{ review.text
                                     }}</div>
                             </div>
@@ -127,12 +127,11 @@
     }
 
     .review-date {
-        color: #777;
         margin: 0;
     }
 
     .review-content {
-        text-align: justify;
+        text-align: left;
     }
 
     @media (max-width: 768px) {
